@@ -1,18 +1,39 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+
+import PlaylistItem from "./PlaylistItem";
 import './App.css';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+      <div className="application" id="application">
+        <div className="appContainer">
+            <div className="playlistInfo">
+                <img src="images/albumCover.png" alt=""></img>
+                <span className="playlistName">Tove Styrke station</span>
+                <input type="button" value="Open on Soundcloud" className="bigSoundcloudBtn" />
+            </div>
+            <div className="playlistSection">
+                <div className="playlistNameSection">
+                    <span className="playlistName">Tove Styrke station</span>
+                </div>
+                <div className="playlist">
+                    <PlaylistItem />
+                </div>
+            </div>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <div className="bottomPlayer">
+            <img src="images/albumCover2.png" alt=""></img>
+            <span className="songNameText">Borderline</span>
+            <span className="authorNameText">– Tove Styrke</span>
+            <div className="controlBtns">
+                <div className="smallBtns volumeBtn"></div>
+                <div className="bigBtns prevBtn"></div>
+                <div className="bigBtns playBtn"></div>
+                <div className="bigBtns nextBtn"></div>
+                <div className="smallBtns shuffleBtn"></div>
+            </div>
+        </div>
       </div>
     );
   }
