@@ -12,7 +12,7 @@ export default function player(state = initialState, action) {
       return
         {
           isPlaying: true
-        },
+        }
 
     default:
       return state
