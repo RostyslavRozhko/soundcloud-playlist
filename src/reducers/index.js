@@ -1,11 +1,12 @@
 import { combineReducers } from 'redux'
 import { routerReducer as routing } from 'react-router-redux'
-import player from './player'
-import PATH from '../constants'
+import playlist from './playlist'
 
 
 const rootReducer = combineReducers({
+  playlist,
   routing
 })
+
 
 export default rootReducer

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 import PlaylistInfo from "../components/PlaylistInfo"
 import BottomPlayer from "./BottomPlayer"
@@ -9,7 +10,7 @@ import { fetchPlaylist } from "../actions"
 
 class App extends Component {
   componentWillMount = () => {
-    fetchPlaylist()
+    this.props.dispatch(fetchPlaylist())
   }
 
   componentDidMount = () => {
@@ -28,4 +29,8 @@ class App extends Component {
   }
 }
 
-export default App
+function mapStateToProps(state) {
+  return {}
+}
+
+export default connect(mapStateToProps)(App)

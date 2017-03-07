@@ -4,7 +4,6 @@ import thunk from 'redux-thunk'
 import createLogger from 'redux-logger'
 import rootReducer from '../reducers'
 import DevTools from '../containers/DevTools'
-import {path} from '../actions'
 
 const configureStore = preloadedState => {
   const store = createStore(
@@ -15,7 +14,6 @@ const configureStore = preloadedState => {
       DevTools.instrument()
     )
   )
-
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
