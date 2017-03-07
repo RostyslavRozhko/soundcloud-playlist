@@ -21,7 +21,7 @@ const normalize = data => {
     id: data.id,
     title: data.title,
     link: data.permalink_url,
-    image: data.tracks[0].artwork_url,
+    image: data.artwork_url ? data.artwork_url.replace('-large', '-t300x300') : data.tracks[0].artwork_url.replace('-large', '-t300x300'),
     tracks: data.tracks
   }
   return obj
@@ -29,8 +29,9 @@ const normalize = data => {
 
 export function fetchPlaylist(){
   return (dispatch) => {
-    SC.get(`playlists/176082928`)
+    SC.get(`playlists/168120389`)
       .then(info =>{
+        console.log(info);
         dispatch(setPlaylist(normalize(info)))
       })
       .catch(err => { throw err })

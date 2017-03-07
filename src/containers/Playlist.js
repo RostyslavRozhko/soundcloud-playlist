@@ -1,19 +1,36 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 
 import PlaylistItem from "./PlaylistItem";
 import '../index.css';
 
-export default class Playlist extends Component{
+class Playlist extends Component{
   render(){
+    if(this.props.tracks){
+      var items = []
+      this.props.tracks.forEach((song, index) => {
+        items.push(<PlaylistItem key={index} song={song}/>)
+      })
+    }
+
     return(
       <div className="playlistSection">
           <div className="playlistNameSection">
               <span className="playlistName">Tove Styrke station</span>
           </div>
           <div className="playlist">
-              <PlaylistItem />
+            {items}
           </div>
       </div>
     )
   }
 }
+
+function mapStateToProps(state) {
+  const tracks = state.playlist.tracks
+  return {
+    tracks
+  }
+}
+
+export default connect(mapStateToProps)(Playlist)
