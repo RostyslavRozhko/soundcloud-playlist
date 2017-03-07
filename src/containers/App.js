@@ -1,11 +1,17 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import PlaylistInfo from "../components/PlaylistInfo";
-import BottomPlayer from "./BottomPlayer";
-import Playlist from "./Playlist";
-import '../index.css';
+import PlaylistInfo from "../components/PlaylistInfo"
+import BottomPlayer from "./BottomPlayer"
+import Playlist from "./Playlist"
+import '../index.css'
+
+import { fetchPlaylist } from "../actions"
 
 class App extends Component {
+  componentWillMount = () => {
+    fetchPlaylist()
+  }
+
   componentDidMount = () => {
     window.location.hash = "application"
   }
@@ -22,4 +28,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default App
