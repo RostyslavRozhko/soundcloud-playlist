@@ -48,6 +48,8 @@ export function startPlayingAction(index, dispatch, id) {
   console.log(id);
   SC.stream(`/tracks/${id}`)
     .then(player => {
+      console.log(player);
+      player.options.protocols = [ "http" ]
       player.play()
       dispatch(startPlaying(index))
     })
