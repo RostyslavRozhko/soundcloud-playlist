@@ -1,16 +1,31 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
-import { playSong } from "../actions"
-
+import { pausePlaying } from "../actions"
+import { PAUSE, PLAY } from "../constants"
 import '../index.css';
 
 class BottomPlayer extends Component {
-  handleClick() {
-    console.log("click")
+  constructor(props){
+    super(props)
+    this.handleClick = this.handleClick.bind(this)
+  }
+  handleClick(btn) {
+    switch(btn){
+      case PLAY:
+    }
+    this.props.dispatch(pausePlaying())
   }
 
   render(){
+    let PlayPauseBtn = null
+    if (this.props.isPlaying){
+      PlayPauseBtn = <div className="bigBtns pauseBtn" onClick={this.handleClick(PAUSE)}></div>
+    }
+    else {
+      PlayPauseBtn = <div className="bigBtns playBtn" onClick={this.handleClick(PLAY)}></div>
+    }
+
     return(
       <div className="bottomPlayer">
           <img src="/images/albumCover2.png" alt=""></img>
@@ -19,7 +34,7 @@ class BottomPlayer extends Component {
           <div className="controlBtns">
               <div className="smallBtns volumeBtn"></div>
               <div className="bigBtns prevBtn"></div>
-              <div className="bigBtns playBtn"></div>
+              { PlayPauseBtn }
               <div className="bigBtns nextBtn" onClick={this.handleClick}></div>
               <div className="smallBtns shuffleBtn"></div>
           </div>
@@ -29,7 +44,10 @@ class BottomPlayer extends Component {
 }
 
 function mapStateToProps(state) {
-  return {}
+  let isPlaying = state.playlist.isPlaying
+  return {
+    isPlaying
+  }
 }
 
 export default connect(mapStateToProps)(BottomPlayer)

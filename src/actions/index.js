@@ -1,16 +1,25 @@
 import SC from 'soundcloud'
 
 import { SET_PLAYLIST } from "../constants"
-import { START_PLAYING } from "../constants"
+import { START_PLAYING, PAUSE, PLAY } from "../constants"
 
 export const setPlaylist = data => ({
   type: SET_PLAYLIST,
   data
 })
 
-export const startPlaying = id => ({
+export const startPlaying = (id, player) => ({
   type: START_PLAYING,
-  id
+  id,
+  player
+})
+
+export const pausePlaying = () => ({
+  type: PAUSE
+})
+
+export const playPlaying = () => ({
+  type: PLAY
 })
 
 const CLIENT_ID = 'f4323c6f7c0cd73d2d786a2b1cdae80c';
@@ -36,7 +45,6 @@ export function fetchPlaylist(route){
   return (dispatch, state) => {
     SC.get(`playlists${route}`)
       .then(info =>{
-        console.log(info.tracks[0]);
         dispatch(setPlaylist(normalize(info)))
         startPlayingAction(0, dispatch, info.tracks[0].id)
       })
@@ -45,13 +53,11 @@ export function fetchPlaylist(route){
 }
 
 export function startPlayingAction(index, dispatch, id) {
-  console.log(id);
   SC.stream(`/tracks/${id}`)
     .then(player => {
-      console.log(player);
       player.options.protocols = [ "http" ]
       player.play()
-      dispatch(startPlaying(index))
+      dispatch(startPlaying(index, player))
     })
     .catch(err => { throw err })
 }

@@ -187,6 +187,11 @@ a{
   background-size: 35px 35px
 }
 
+.bottomPlayer .controlBtns .pauseBtn{
+  background: url(../public/images/pause.svg);
+  background-size: 35px 35px
+}
+
 .bottomPlayer .controlBtns .nextBtn{
   background: url(../public/images/next.svg);
   background-size: 35px 35px
