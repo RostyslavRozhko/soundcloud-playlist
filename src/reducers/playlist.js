@@ -6,11 +6,16 @@ export default function playlist(state = {}, action){
     case SET_PLAYLIST:
       return Object.assign({}, state, action.data)
     case START_PLAYING:
+      let obj = Object.assign({}, state.tracks)
+      obj[action.id] = Object.assign({}, obj[action.id], {
+        isCurrent: true
+      })
       return Object.assign({}, state,
       {
         isPlaying: true,
         currentSong: action.id,
-        player: action.player
+        player: action.player,
+        tracks: obj
       })
     case PAUSE:
       state.player.pause()

@@ -9,7 +9,7 @@ class Playlist extends Component{
     if(this.props.tracks){
       var items = []
       this.props.tracks.forEach((song, index) => {
-        items.push(<PlaylistItem key={index} song={song}/>)
+        items.push(<PlaylistItem key={index} song={song} index={index}/>)
       })
     }
 

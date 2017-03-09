@@ -197,6 +197,10 @@ a{
   background-size: 35px 35px
 }
 
+.currentSong{
+  background: green
+}
+
 .songNameText{
   margin: 0 7px;
   color: white;

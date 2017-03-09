@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
-import { pausePlaying } from "../actions"
+import { pausePlaying, playPlaying } from "../actions"
 import { PAUSE, PLAY } from "../constants"
 import '../index.css';
 
@@ -13,17 +13,23 @@ class BottomPlayer extends Component {
   handleClick(btn) {
     switch(btn){
       case PLAY:
+        this.props.dispatch(playPlaying())
+        break
+      case PAUSE:
+        this.props.dispatch(pausePlaying())
+        break
+      default:
+        return
     }
-    this.props.dispatch(pausePlaying())
   }
 
   render(){
     let PlayPauseBtn = null
     if (this.props.isPlaying){
-      PlayPauseBtn = <div className="bigBtns pauseBtn" onClick={this.handleClick(PAUSE)}></div>
+      PlayPauseBtn = <div className="bigBtns pauseBtn" onClick={() => this.handleClick(PAUSE)}></div>
     }
     else {
-      PlayPauseBtn = <div className="bigBtns playBtn" onClick={this.handleClick(PLAY)}></div>
+      PlayPauseBtn = <div className="bigBtns playBtn" onClick={() => this.handleClick(PLAY)}></div>
     }
 
     return(

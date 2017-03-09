@@ -1,4 +1,6 @@
 import React, { Component  } from 'react'
+import { connect } from 'react-redux'
+
 import '../index.css';
 
 class PlaylistItem extends Component {
@@ -7,10 +9,17 @@ class PlaylistItem extends Component {
     const duration = () => {
       return ((song.duration/1000/60) << 0) + ":" + (((song.duration/1000) % 60) << 0)
     }
+
+    let image = null
+    if (this.props.tracks[this.props.index].isCurrent)
+      image = <img src={song.artwork_url} alt="" class="currentSong"></img>
+    else
+      image = <img src={song.artwork_url} alt=""></img>
+
     return (
       <div className="item">
           <div className="btn reorderBtn"></div>
-          <img src={song.artwork_url} alt=""></img>
+          { image }
           <span className="songNameText">{song.title}</span>
           <span className="authorNameText">– {song.user.username}</span>
           <span className="authorNameText"> · {duration()}</span>
@@ -20,4 +29,11 @@ class PlaylistItem extends Component {
   }
 }
 
-export default PlaylistItem;
+function mapStateToProps(state) {
+  let tracks = state.playlist.tracks
+  return {
+    tracks
+  }
+}
+
+export default connect(mapStateToProps)(PlaylistItem)
