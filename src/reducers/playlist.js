@@ -1,5 +1,4 @@
 import { SET_PLAYLIST } from '../constants'
-// import { merge } from 'lodash/merge'
 
 export default function playlist(state = {}, action){
   switch(action.type){

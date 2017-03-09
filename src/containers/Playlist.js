@@ -16,7 +16,7 @@ class Playlist extends Component{
     return(
       <div className="playlistSection">
           <div className="playlistNameSection">
-              <span className="playlistName">Tove Styrke station</span>
+              <span className="playlistName">{this.props.playlistTitle}</span>
           </div>
           <div className="playlist">
             {items}
@@ -29,6 +29,7 @@ class Playlist extends Component{
 function mapStateToProps(state) {
   const tracks = state.playlist.tracks
   return {
+    playlistTitle: state.playlist.title,
     tracks
   }
 }

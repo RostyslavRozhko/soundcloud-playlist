@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+
+import { playSong } from "../actions"
 
 import '../index.css';
 
-export default class BottomPlayer extends Component {
+class BottomPlayer extends Component {
   handleClick() {
-
+    console.log("click")
   }
 
   render(){
@@ -16,11 +19,17 @@ export default class BottomPlayer extends Component {
           <div className="controlBtns">
               <div className="smallBtns volumeBtn"></div>
               <div className="bigBtns prevBtn"></div>
-              <div className="bigBtns playBtn" onClick={this.handleClick}></div>
-              <div className="bigBtns nextBtn"></div>
+              <div className="bigBtns playBtn"></div>
+              <div className="bigBtns nextBtn" onClick={this.handleClick}></div>
               <div className="smallBtns shuffleBtn"></div>
           </div>
       </div>
     )
   }
 }
+
+function mapStateToProps(state) {
+  return {}
+}
+
+export default connect(mapStateToProps)(BottomPlayer)

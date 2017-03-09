@@ -10,7 +10,7 @@ import { fetchPlaylist } from "../actions"
 
 class App extends Component {
   componentWillMount = () => {
-    this.props.dispatch(fetchPlaylist())
+    this.props.dispatch(fetchPlaylist(this.props.route))
   }
 
   componentDidMount = () => {
@@ -30,7 +30,10 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-  return {}
+  const route = state.routing.locationBeforeTransitions.pathname;
+  return {
+    route: route
+  }
 }
 
 export default connect(mapStateToProps)(App)
