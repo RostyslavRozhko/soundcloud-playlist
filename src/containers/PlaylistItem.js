@@ -5,14 +5,16 @@ import '../index.css';
 
 class PlaylistItem extends Component {
   render(){
-    const song = this.props.song
+    const song = this.props.tracks[this.props.index]
     const duration = () => {
       return ((song.duration/1000/60) << 0) + ":" + (((song.duration/1000) % 60) << 0)
     }
 
     let image = null
-    if (this.props.tracks[this.props.index].isCurrent)
-      image = <img src={song.artwork_url} alt="" class="currentSong"></img>
+    console.log(song.isCurrent);
+    if (song.isCurrent)
+      // image = <img src={song.artwork_url} alt="" class="currentSong"></img>
+      image = <div>typidor</div>
     else
       image = <img src={song.artwork_url} alt=""></img>
 
@@ -30,9 +32,8 @@ class PlaylistItem extends Component {
 }
 
 function mapStateToProps(state) {
-  let tracks = state.playlist.tracks
   return {
-    tracks
+    tracks: state.playlist.tracks
   }
 }
 

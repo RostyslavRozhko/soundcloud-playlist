@@ -1,4 +1,5 @@
 import SC from 'soundcloud'
+import { CLIENT_ID } from "../constants"
 
 import { SET_PLAYLIST } from "../constants"
 import { START_PLAYING, PAUSE, PLAY } from "../constants"
@@ -21,8 +22,6 @@ export const pausePlaying = () => ({
 export const playPlaying = () => ({
   type: PLAY
 })
-
-const CLIENT_ID = 'f4323c6f7c0cd73d2d786a2b1cdae80c';
 
 SC.initialize({
   client_id: CLIENT_ID
