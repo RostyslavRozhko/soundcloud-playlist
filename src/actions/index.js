@@ -61,8 +61,13 @@ export function startPlayingAction(index, id) {
     SC.stream(`/tracks/${id}`)
       .then(player => {
         player.options.protocols = [ "http" ]
-        // player.play()
-        dispatch(stopPlaying())
+        player.play()
+        player.on("finish", () => {
+          let nextIndex = index + 1
+          dispatch(startPlayingAction(nextIndex,
+            dispatch(getSongIdByIndex(nextIndex))))
+        })
+        // dispatch(stopPlaying())
         dispatch(startPlaying(index, player))
       })
       .catch(err => { throw err })
