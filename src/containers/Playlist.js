@@ -9,7 +9,11 @@ class Playlist extends Component{
     if(this.props.tracks){
       var items = []
       this.props.tracks.forEach((song, index) => {
-        items.push(<PlaylistItem key={index} song={song} index={index}/>)
+        let is = false
+        if(index === this.props.currentSongPosition){
+          is = true
+        }
+        items.push(<PlaylistItem key={index} song={song} index={index} isCurrent={is}/>)
       })
     }
 
@@ -27,10 +31,13 @@ class Playlist extends Component{
 }
 
 function mapStateToProps(state) {
-  const tracks = state.playlist.tracks
+  let tracks = state.playlist.tracks
+  let playlistTitle = state.playlist.title
+  let currentSongPosition = state.playlist.currentSongPosition
   return {
-    playlistTitle: state.playlist.title,
-    tracks
+    playlistTitle,
+    tracks,
+    currentSongPosition
   }
 }
 

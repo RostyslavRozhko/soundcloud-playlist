@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
-import { pausePlaying, playPlaying } from "../actions"
-import { PAUSE, PLAY } from "../constants"
+import { pausePlaying, playPlaying, startPlayingAction, getSongIdByIndex } from "../actions"
+import { PAUSE, PLAY, NEXT, PREV } from "../constants"
 import '../index.css';
 
 class BottomPlayer extends Component {
@@ -18,6 +18,16 @@ class BottomPlayer extends Component {
       case PAUSE:
         this.props.dispatch(pausePlaying())
         break
+      case NEXT:
+        var index = this.props.currentSongPosition + 1
+        var id = this.props.dispatch(getSongIdByIndex(index))
+        this.props.dispatch(startPlayingAction(index, id))
+        break
+      case PREV:
+        var index = this.props.currentSongPosition - 1
+        var id = this.props.dispatch(getSongIdByIndex(index))
+        this.props.dispatch(startPlayingAction(index, id))
+        break
       default:
         return
     }
@@ -32,16 +42,23 @@ class BottomPlayer extends Component {
       PlayPauseBtn = <div className="bigBtns playBtn" onClick={() => this.handleClick(PLAY)}></div>
     }
 
+
+    if(this.props.currentSong){
+      var image = this.props.currentSong.artwork_url
+      var title = this.props.currentSong.title
+      var name = this.props.currentSong.user.username
+    }
+
     return(
       <div className="bottomPlayer">
-          <img src="/images/albumCover2.png" alt=""></img>
-          <span className="songNameText">Borderline</span>
-          <span className="authorNameText">– Tove Styrke</span>
+          <img src={image} alt=""></img>
+          <span className="songNameText">{title}</span>
+          <span className="authorNameText">– {name}</span>
           <div className="controlBtns">
               <div className="smallBtns volumeBtn"></div>
-              <div className="bigBtns prevBtn"></div>
+              <div className="bigBtns prevBtn" onClick={() => this.handleClick(PREV)}></div>
               { PlayPauseBtn }
-              <div className="bigBtns nextBtn" onClick={this.handleClick}></div>
+              <div className="bigBtns nextBtn" onClick={() => this.handleClick(NEXT)}></div>
               <div className="smallBtns shuffleBtn"></div>
           </div>
       </div>
@@ -51,8 +68,12 @@ class BottomPlayer extends Component {
 
 function mapStateToProps(state) {
   let isPlaying = state.playlist.isPlaying
+  let currentSong = state.playlist.currentSong
+  let currentSongPosition = state.playlist.currentSongPosition
   return {
-    isPlaying
+    isPlaying,
+    currentSong,
+    currentSongPosition
   }
 }
 

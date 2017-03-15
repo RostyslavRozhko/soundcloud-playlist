@@ -1,21 +1,17 @@
 import { SET_PLAYLIST } from '../constants'
-import { START_PLAYING, PAUSE, PLAY } from '../constants'
+import { START_PLAYING, PAUSE, PLAY, STOP } from '../constants'
 
 export default function playlist(state = {}, action){
   switch(action.type){
     case SET_PLAYLIST:
       return Object.assign({}, state, action.data)
     case START_PLAYING:
-      let obj = Object.assign({}, state)
-      obj.tracks[action.id] = Object.assign({}, obj.tracks[action.id], {
-        isCurrent: true
-      })
       return Object.assign({}, state,
       {
         isPlaying: true,
-        currentSong: action.id,
-        player: action.player,
-        tracks: obj.tracks
+        currentSongPosition: action.id,
+        currentSong: state.tracks[action.id],
+        player: action.player
       })
     case PAUSE:
       state.player.pause()
@@ -29,6 +25,11 @@ export default function playlist(state = {}, action){
       {
         isPlaying: true,
       })
+    case STOP:
+      return Object.assign({}, state,
+        {
+          player: null
+        })
     default:
       return state
   }
