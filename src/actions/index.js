@@ -62,6 +62,12 @@ export function startPlayingAction(index, id) {
       .then(player => {
         player.options.protocols = [ "http" ]
         // player.play()
+        player.on("finish", () => {
+          let nextIndex = index + 1
+          dispatch(startPlayingAction(nextIndex,
+            dispatch(getSongIdByIndex(nextIndex))))
+        })
+
         dispatch(stopPlaying())
         dispatch(startPlaying(index, player))
       })

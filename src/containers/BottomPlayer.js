@@ -19,14 +19,14 @@ class BottomPlayer extends Component {
         this.props.dispatch(pausePlaying())
         break
       case NEXT:
-        var index = this.props.currentSongPosition + 1
-        var id = this.props.dispatch(getSongIdByIndex(index))
-        this.props.dispatch(startPlayingAction(index, id))
+        let nextIndex = this.props.currentSongPosition + 1
+        var id = this.props.dispatch(getSongIdByIndex(nextIndex))
+        this.props.dispatch(startPlayingAction(nextIndex, id))
         break
       case PREV:
-        var index = this.props.currentSongPosition - 1
-        var id = this.props.dispatch(getSongIdByIndex(index))
-        this.props.dispatch(startPlayingAction(index, id))
+        let prevIndex = this.props.currentSongPosition - 1
+        var id = this.props.dispatch(getSongIdByIndex(prevIndex))
+        this.props.dispatch(startPlayingAction(prevIndex, id))
         break
       default:
         return
@@ -41,7 +41,6 @@ class BottomPlayer extends Component {
     else {
       PlayPauseBtn = <div className="bigBtns playBtn" onClick={() => this.handleClick(PLAY)}></div>
     }
-
 
     if(this.props.currentSong){
       var image = this.props.currentSong.artwork_url
