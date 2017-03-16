@@ -79,7 +79,6 @@ export function startPlayingAction(index, id) {
           dispatch(startPlayingAction(nextIndex,
             dispatch(getSongIdByIndex(nextIndex))))
         })
-
         // dispatch(stopPlaying())
         dispatch(startPlaying(index, player))
       })
