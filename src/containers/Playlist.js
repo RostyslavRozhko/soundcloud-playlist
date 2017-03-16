@@ -17,7 +17,7 @@ const SortableList = SortableContainer(({items, currentSongPosition}) => {
     <div className="playlist">
       {items.map((value, index) => {
         let is = false
-        if(index == currentSongPosition){
+        if(index === currentSongPosition){
           is = true
         }
         return <SortableItem key={index} value={value} index={index} isCurrent={is}/>
@@ -35,8 +35,23 @@ class Playlist extends Component{
   }
   onSortEnd = ({oldIndex, newIndex}) => {
     let copy = this.props.tracks
+    var newCurrentIndex
+    var currentIndex = this.props.currentSongPosition
+
+    if(currentIndex === oldIndex){
+      newCurrentIndex = newIndex
+    } else if(oldIndex > currentIndex && newIndex > currentIndex || oldIndex < currentIndex && newIndex < currentIndex){
+      newCurrentIndex = currentIndex
+    } else if(currentIndex > oldIndex && currentIndex <= newIndex){
+      newCurrentIndex = currentIndex - 1
+    } else if(currentIndex > oldIndex && currentIndex <= newIndex){
+      newCurrentIndex = currentIndex - 1
+    } else if(currentIndex >= newIndex && currentIndex < oldIndex){
+      newCurrentIndex = currentIndex + 1
+    }
+
     copy = arrayMove(copy, oldIndex, newIndex)
-    this.props.dispatch(moveTracks(copy, newIndex))
+    this.props.dispatch(moveTracks(copy, newCurrentIndex))
   };
 
   render(){
