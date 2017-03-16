@@ -1,7 +1,7 @@
 import SC from 'soundcloud'
 import { CLIENT_ID } from "../constants"
 
-import { SET_PLAYLIST } from "../constants"
+import { SET_PLAYLIST, MOVE_ITEMS } from "../constants"
 import { START_PLAYING, PAUSE, PLAY, STOP } from "../constants"
 
 export const setPlaylist = data => ({
@@ -26,6 +26,18 @@ export const playPlaying = () => ({
 const stopPlaying = () => ({
   type: STOP
 })
+
+const moveItems = (tracks, newIndex) => ({
+  type: MOVE_ITEMS,
+  tracks: tracks,
+  index: newIndex
+})
+
+export function moveTracks(tracks, newIndex){
+  return (dispatch) => {
+    dispatch(moveItems(tracks, newIndex))
+  }
+}
 
 SC.initialize({
   client_id: CLIENT_ID
@@ -68,7 +80,7 @@ export function startPlayingAction(index, id) {
             dispatch(getSongIdByIndex(nextIndex))))
         })
 
-        dispatch(stopPlaying())
+        // dispatch(stopPlaying())
         dispatch(startPlaying(index, player))
       })
       .catch(err => { throw err })

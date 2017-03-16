@@ -20,13 +20,13 @@ class BottomPlayer extends Component {
         break
       case NEXT:
         let nextIndex = this.props.currentSongPosition + 1
-        var id = this.props.dispatch(getSongIdByIndex(nextIndex))
-        this.props.dispatch(startPlayingAction(nextIndex, id))
+        let nextId = this.props.dispatch(getSongIdByIndex(nextIndex))
+        this.props.dispatch(startPlayingAction(nextIndex, nextId))
         break
       case PREV:
         let prevIndex = this.props.currentSongPosition - 1
-        var id = this.props.dispatch(getSongIdByIndex(prevIndex))
-        this.props.dispatch(startPlayingAction(prevIndex, id))
+        let prevId = this.props.dispatch(getSongIdByIndex(prevIndex))
+        this.props.dispatch(startPlayingAction(prevIndex, prevId))
         break
       default:
         return

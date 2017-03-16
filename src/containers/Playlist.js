@@ -1,30 +1,51 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
+
+import { moveTracks } from '../actions'
+
+import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc'
 
 import PlaylistItem from "./PlaylistItem";
 import '../index.css';
 
-class Playlist extends Component{
-  render(){
-    if(this.props.tracks){
-      var items = []
-      this.props.tracks.forEach((song, index) => {
+const SortableItem = SortableElement(({value, index, isCurrent}) => (
+  <PlaylistItem song={value} index={index} isCurrent={isCurrent}/>
+))
+
+const SortableList = SortableContainer(({items, currentSongPosition}) => {
+  return (
+    <div className="playlist">
+      {items.map((value, index) => {
         let is = false
-        if(index === this.props.currentSongPosition){
+        if(index == currentSongPosition){
           is = true
         }
-        items.push(<PlaylistItem key={index} song={song} index={index} isCurrent={is}/>)
-      })
-    }
+        return <SortableItem key={index} value={value} index={index} isCurrent={is}/>
+      }
+    )}
+    </div>
+  );
+});
 
+class Playlist extends Component{
+  showPlaylist = () => {
+    if(this.props.tracks){
+      return <SortableList items={this.props.tracks} onSortEnd={this.onSortEnd} currentSongPosition={this.props.currentSongPosition}/>
+    }
+  }
+  onSortEnd = ({oldIndex, newIndex}) => {
+    let copy = this.props.tracks
+    copy = arrayMove(copy, oldIndex, newIndex)
+    this.props.dispatch(moveTracks(copy, newIndex))
+  };
+
+  render(){
     return(
       <div className="playlistSection">
           <div className="playlistNameSection">
               <span className="playlistName">{this.props.playlistTitle}</span>
           </div>
-          <div className="playlist">
-            {items}
-          </div>
+          {this.showPlaylist()}
       </div>
     )
   }

@@ -1,5 +1,8 @@
 import { SET_PLAYLIST } from '../constants'
+import { MOVE_ITEMS } from '../constants'
 import { START_PLAYING, PAUSE, PLAY, STOP } from '../constants'
+
+// import { arrayMove } from 'react-sortable-hoc'
 
 export default function playlist(state = {}, action){
   switch(action.type){
@@ -29,6 +32,12 @@ export default function playlist(state = {}, action){
       return Object.assign({}, state,
         {
           player: null
+        })
+    case MOVE_ITEMS:
+      return Object.assign({}, state,
+        {
+          tracks: action.tracks,
+          currentSongPosition: action.index
         })
     default:
       return state

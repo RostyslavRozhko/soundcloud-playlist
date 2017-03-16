@@ -17,7 +17,7 @@ class PlaylistItem extends Component {
 
 
   render(){
-    const song = this.props.tracks[this.props.index]
+    const song = this.props.song
     const duration = () => {
       return ((song.duration/1000/60) << 0) + ":" + (((song.duration/1000) % 60) << 0)
     }
@@ -29,7 +29,7 @@ class PlaylistItem extends Component {
       image = <img src={song.artwork_url} alt=""></img>
 
     return (
-      <div className="item" onClick={() => this.playSong(this.props.index, song.id)}>
+      <div className="item" /*onClick={() => this.playSong(this.props.index, song.id)}*/>
           <div className="btn reorderBtn"></div>
           { image }
           <span className="songNameText">{song.title}</span>
@@ -43,7 +43,6 @@ class PlaylistItem extends Component {
 
 function mapStateToProps(state) {
   return {
-    tracks: state.playlist.tracks
   }
 }
 
