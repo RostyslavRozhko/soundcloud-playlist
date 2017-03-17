@@ -88,6 +88,15 @@ a{
   background-color: rgba(106,112,127, .9);
 }
 
+.noselect {
+  -webkit-touch-callout: none;
+    -webkit-user-select: none;
+     -khtml-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+
 .item{
   display: flex;
   flex: 0 0 50px;
@@ -101,22 +110,28 @@ a{
   background-image: url(../public/images/reorder.svg);
 }
 
+.clickable{
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+}
+
 .item *{
   margin: 0 5px;
 }
 
-.item img{
+.item .clickable img{
   height: 40px;
   width: 40px;
 }
 
-.item .songNameText{
+.item .clickable .songNameText{
   color: black;
   font-size: 14px;
   margin-right: 0;
 }
 
-.item .authorNameText{
+.item .clickable .authorNameText{
   color: black;
   font-size: 13px;
   margin-right: 0;
@@ -128,9 +143,44 @@ a{
   background-size: 20px 20px;
 }
 
-.item .moreBtn{
-  background-image: url(../public/images/more.svg);
+.menu{
   margin-left: auto;
+}
+
+.menu .dd-menu-items{
+  margin: 0;
+  position: absolute;
+  right: 50px;
+  background: white;
+  box-shadow: 1px 1px 5px 0px rgba(50,50,50,1);
+}
+
+ul, .dd-items-left{
+  margin: 0;
+  padding: 0;
+}
+
+.dropdownItem:hover{
+  background: rgb(241, 241, 241);
+}
+
+.dropdownItem{
+  padding: 0;
+  margin: 4px 0;
+  height: 28px;
+  width: 150px;
+  list-style: none;
+  text-align: center;
+}
+
+.dropdownItem a{
+  font-size: 15px;
+  color: black;
+  text-decoration: none;
+}
+
+.moreBtn{
+  background-image: url(../public/images/more.svg);
 }
 
 .bottomPlayer{

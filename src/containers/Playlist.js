@@ -8,8 +8,8 @@ import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc'
 import PlaylistItem from "./PlaylistItem";
 import '../index.css';
 
-const SortableItem = SortableElement(({value, index, isCurrent}) => (
-  <PlaylistItem song={value} index={index} isCurrent={isCurrent}/>
+const SortableItem = SortableElement(({value, songPosition, isCurrent}) => (
+  <PlaylistItem song={value} index={songPosition} isCurrent={isCurrent}/>
 ))
 
 const SortableList = SortableContainer(({items, currentSongPosition}) => {
@@ -20,7 +20,7 @@ const SortableList = SortableContainer(({items, currentSongPosition}) => {
         if(index === currentSongPosition){
           is = true
         }
-        return <SortableItem key={index} value={value} index={index} isCurrent={is}/>
+        return <SortableItem key={index} value={value} index={index} songPosition={index} isCurrent={is}/>
       }
     )}
     </div>
@@ -30,7 +30,12 @@ const SortableList = SortableContainer(({items, currentSongPosition}) => {
 class Playlist extends Component{
   showPlaylist = () => {
     if(this.props.tracks){
-      return <SortableList items={this.props.tracks} onSortEnd={this.onSortEnd} currentSongPosition={this.props.currentSongPosition}/>
+      return <SortableList items={this.props.tracks}
+        onSortEnd={this.onSortEnd}
+        currentSongPosition={this.props.currentSongPosition}
+        lockAxis="y"
+        distance={1}
+      />
     }
   }
   onSortEnd = ({oldIndex, newIndex}) => {
@@ -40,7 +45,7 @@ class Playlist extends Component{
 
     if(currentIndex === oldIndex){
       newCurrentIndex = newIndex
-    } else if(oldIndex > currentIndex && newIndex > currentIndex || oldIndex < currentIndex && newIndex < currentIndex){
+    } else if((oldIndex > currentIndex && newIndex > currentIndex) || (oldIndex < currentIndex && newIndex < currentIndex)){
       newCurrentIndex = currentIndex
     } else if(currentIndex > oldIndex && currentIndex <= newIndex){
       newCurrentIndex = currentIndex - 1

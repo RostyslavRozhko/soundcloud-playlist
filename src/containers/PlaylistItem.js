@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import { startPlayingAction } from '../actions'
 
+import {DropdownItemMenu} from './DropdownItemMenu'
 import '../index.css';
 
 class PlaylistItem extends Component {
@@ -12,9 +13,9 @@ class PlaylistItem extends Component {
   }
 
   playSong(index, id){
+    if(!this.props.isCurrent)
     this.props.dispatch(startPlayingAction(index, id))
   }
-
 
   render(){
     const song = this.props.song
@@ -29,13 +30,15 @@ class PlaylistItem extends Component {
       image = <img src={song.artwork_url} alt=""></img>
 
     return (
-      <div className="item" /*onClick={() => this.playSong(this.props.index, song.id)}*/>
+      <div className="item" >
           <div className="btn reorderBtn"></div>
-          { image }
-          <span className="songNameText">{song.title}</span>
-          <span className="authorNameText">– {song.user.username}</span>
-          <span className="authorNameText"> · {duration()}</span>
-          <div className="btn moreBtn"></div>
+          <div onClick={() => this.playSong(this.props.index, song.id)} className="clickable">
+              { image }
+              <span className="songNameText noselect">{song.title}</span>
+              <span className="authorNameText noselect">– {song.user.username}</span>
+              <span className="authorNameText noselect"> · {duration()}</span>
+          </div>
+          <DropdownItemMenu />
       </div>
     )
   }

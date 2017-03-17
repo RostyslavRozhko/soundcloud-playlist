@@ -19,7 +19,7 @@ class BottomPlayer extends Component {
         this.props.dispatch(pausePlaying())
         break
       case PREV:
-        if(this.props.currentSongPosition == 0){
+        if(this.props.currentSongPosition === 0){
           break
         }
         let prevIndex = this.props.currentSongPosition - 1
