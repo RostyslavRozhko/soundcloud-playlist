@@ -1,5 +1,4 @@
-import { SET_PLAYLIST } from '../constants'
-import { MOVE_ITEMS } from '../constants'
+import { SET_PLAYLIST, MOVE_ITEMS, DELETE } from '../constants'
 import { START_PLAYING, PAUSE, PLAY, STOP } from '../constants'
 
 // import { arrayMove } from 'react-sortable-hoc'
@@ -39,6 +38,15 @@ export default function playlist(state = {}, action){
           tracks: action.tracks,
           currentSongPosition: action.index
         })
+    case DELETE:
+      return Object.assign({}, state,
+      {
+        tracks: [
+          ...state.tracks.slice(0, action.index),
+          ...state.tracks.slice(action.index + 1)
+        ],
+        currentSongPosition: state.currentSongPosition > action.index ? state.currentSongPosition - 1 : state.currentSongPosition
+      })
     default:
       return state
   }

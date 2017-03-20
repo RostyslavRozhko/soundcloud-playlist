@@ -6,11 +6,7 @@ import { PAUSE, PLAY, NEXT, PREV } from "../constants"
 import '../index.css';
 
 class BottomPlayer extends Component {
-  constructor(props){
-    super(props)
-    this.handleClick = this.handleClick.bind(this)
-  }
-  handleClick(btn) {
+  handleClick = (btn) => {
     switch(btn){
       case PLAY:
         this.props.dispatch(playPlaying())
@@ -69,13 +65,10 @@ class BottomPlayer extends Component {
 }
 
 function mapStateToProps(state) {
-  let isPlaying = state.playlist.isPlaying
-  let currentSong = state.playlist.currentSong
-  let currentSongPosition = state.playlist.currentSongPosition
   return {
-    isPlaying,
-    currentSong,
-    currentSongPosition
+    isPlaying: state.playlist.isPlaying,
+    currentSong: state.playlist.currentSong,
+    currentSongPosition: state.playlist.currentSongPosition
   }
 }
 

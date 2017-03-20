@@ -1,7 +1,7 @@
 import SC from 'soundcloud'
 import { CLIENT_ID } from "../constants"
 
-import { SET_PLAYLIST, MOVE_ITEMS } from "../constants"
+import { SET_PLAYLIST, MOVE_ITEMS, DELETE } from "../constants"
 import { START_PLAYING, PAUSE, PLAY, STOP } from "../constants"
 
 export const setPlaylist = data => ({
@@ -31,6 +31,11 @@ const moveItems = (tracks, newIndex) => ({
   type: MOVE_ITEMS,
   tracks: tracks,
   index: newIndex
+})
+
+export const deleteTrack = (index) => ({
+  type: DELETE,
+  index: index
 })
 
 export function moveTracks(tracks, newIndex){

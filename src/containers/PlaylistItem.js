@@ -7,14 +7,26 @@ import {DropdownItemMenu} from './DropdownItemMenu'
 import '../index.css';
 
 class PlaylistItem extends Component {
-  constructor(props){
-    super(props)
-    this.playSong = this.playSong.bind(this)
-  }
-
-  playSong(index, id){
+  playSong = (index, id) => {
     if(!this.props.isCurrent)
     this.props.dispatch(startPlayingAction(index, id))
+  }
+
+  createDropdownItems = (song, index) => {
+    return {
+      author:{
+        name: "Go to artist",
+        link: song.user.permalink_url
+      },
+      album: {
+        name: "Go to album",
+        link: song.permalink_url
+      },
+      delete: {
+        name: "Remove from queue",
+        index: index,
+      }
+    }
   }
 
   render(){
@@ -38,15 +50,10 @@ class PlaylistItem extends Component {
               <span className="authorNameText noselect">– {song.user.username}</span>
               <span className="authorNameText noselect"> · {duration()}</span>
           </div>
-          <DropdownItemMenu />
+          <DropdownItemMenu items={this.createDropdownItems(song, this.props.index)}/>
       </div>
     )
   }
 }
 
-function mapStateToProps(state) {
-  return {
-  }
-}
-
-export default connect(mapStateToProps)(PlaylistItem)
+export default connect()(PlaylistItem)

@@ -12,10 +12,10 @@ const SortableItem = SortableElement(({value, songPosition, isCurrent}) => (
   <PlaylistItem song={value} index={songPosition} isCurrent={isCurrent}/>
 ))
 
-const SortableList = SortableContainer(({items, currentSongPosition}) => {
+const SortableList = SortableContainer(({tracksItems, currentSongPosition}) => {
   return (
     <div className="playlist">
-      {items.map((value, index) => {
+      {tracksItems.map((value, index) => {
         let is = false
         if(index === currentSongPosition){
           is = true
@@ -28,16 +28,7 @@ const SortableList = SortableContainer(({items, currentSongPosition}) => {
 });
 
 class Playlist extends Component{
-  showPlaylist = () => {
-    if(this.props.tracks){
-      return <SortableList items={this.props.tracks}
-        onSortEnd={this.onSortEnd}
-        currentSongPosition={this.props.currentSongPosition}
-        lockAxis="y"
-        distance={1}
-      />
-    }
-  }
+
   onSortEnd = ({oldIndex, newIndex}) => {
     let copy = this.props.tracks
     var newCurrentIndex
@@ -57,28 +48,36 @@ class Playlist extends Component{
 
     copy = arrayMove(copy, oldIndex, newIndex)
     this.props.dispatch(moveTracks(copy, newCurrentIndex))
-  };
+  }
 
   render(){
+    if(this.props.tracks){
+      var playlist = <SortableList
+        tracksItems={this.props.tracks}
+        currentSongPosition={this.props.currentSongPosition}
+        onSortEnd={this.onSortEnd}
+        lockAxis="y"
+        lockToContainerEdges={true}
+        distance={1}
+      />
+    }
+
     return(
       <div className="playlistSection">
           <div className="playlistNameSection">
               <span className="playlistName">{this.props.playlistTitle}</span>
           </div>
-          {this.showPlaylist()}
+          {playlist}
       </div>
     )
   }
 }
 
 function mapStateToProps(state) {
-  let tracks = state.playlist.tracks
-  let playlistTitle = state.playlist.title
-  let currentSongPosition = state.playlist.currentSongPosition
   return {
-    playlistTitle,
-    tracks,
-    currentSongPosition
+    playlistTitle: state.playlist.title,
+    tracks: state.playlist.tracks,
+    currentSongPosition: state.playlist.currentSongPosition
   }
 }
 

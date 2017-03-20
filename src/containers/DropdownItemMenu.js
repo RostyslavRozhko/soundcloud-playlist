@@ -31,11 +31,12 @@ export class DropdownItemMenu extends Component {
       className: "menu",
       align: 'left',
     };
+    let obj = this.props.items
     return (
       <DropdownMenu {...menuOptions}>
-        <DropdownItem url="http://" name="test" />
-        <DropdownItem url="http://" name="test" />
-        <DropdownItem url="http://" name="test" />
+        <DropdownItem name={obj.delete.name} index={obj.delete.index} isAction={true}/>
+        <DropdownItem url={obj.album.link} name={obj.album.name} isAction={false}/>
+        <DropdownItem url={obj.author.link} name={obj.author.name} isAction={false}/>
       </DropdownMenu>
     );
   }
