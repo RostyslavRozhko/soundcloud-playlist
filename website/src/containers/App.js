@@ -6,7 +6,7 @@ import BottomPlayer from "./BottomPlayer"
 import Playlist from "./Playlist"
 import '../index.css'
 
-import { fetchPlaylist } from "../actions"
+import { fetchPlaylist } from "../actions/playlist"
 
 class App extends Component {
   componentWillMount = () => {

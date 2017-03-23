@@ -1,7 +1,7 @@
 import React, { Component  } from 'react'
 import { connect } from 'react-redux'
 
-import { startPlayingAction } from '../actions'
+import { startPlayingAction } from '../actions/playlist'
 
 import {DropdownItemMenu} from './DropdownItemMenu'
 import '../index.css';

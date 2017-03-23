@@ -75,7 +75,6 @@ export function fetchPlaylist(route){
 
 export function startPlayingAction(index, id) {
   return (dispatch) => {
-    console.log(JSON.stringify(state(), null, 4));
     SC.stream(`/tracks/${id}`)
       .then(player => {
         player.options.protocols = [ "http" ]

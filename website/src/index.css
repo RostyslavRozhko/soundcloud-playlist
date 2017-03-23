@@ -53,6 +53,10 @@ a{
   font-size: 18px;
 }
 
+.playlistSection .playlistName{
+  flex: 1 1 auto;
+}
+
 .playlistInfo .bigSoundcloudBtn{
   background-color: rgba(106,112,127, .9);
   color: white;
@@ -262,4 +266,11 @@ ul, .dd-items-left{
   color: whitesmoke;
   font-weight: 300;
   font-size: 15px;
+}
+
+.playlistBtn{
+  background-image: url(../public/images/moreB.svg);
+  height: 25px;
+  width: 25px;
+  background-size: 25px 25px;
 }

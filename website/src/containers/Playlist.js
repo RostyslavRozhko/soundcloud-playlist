@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { moveTracks } from '../actions'
+import { moveTracks } from '../actions/playlist'
 
 import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc'
 
-import PlaylistItem from "./PlaylistItem";
+import PlaylistItem from "./PlaylistItem"
+import DropdownPlaylistMenu from './DropdownPlaylistMenu'
+
 import '../index.css';
 
 const SortableItem = SortableElement(({value, songPosition, isCurrent}) => (
@@ -66,6 +68,7 @@ class Playlist extends Component{
       <div className="playlistSection">
           <div className="playlistNameSection">
               <span className="playlistName">{this.props.playlistTitle}</span>
+              <DropdownPlaylistMenu />
           </div>
           {playlist}
       </div>

@@ -1,3 +1,4 @@
+// Playlist
 export const PLAY = "PLAY"
 export const PAUSE = "PAUSE"
 export const STOP = "STOP"
@@ -10,3 +11,7 @@ export const SET_PLAYLIST = "SET_PLAYLIST"
 export const MOVE_ITEMS = "MOVE_ITEMS"
 
 export const CLIENT_ID = 'f4323c6f7c0cd73d2d786a2b1cdae80c';
+
+
+// Database
+export const WEBSITE_URI = "http://localhost:9000/api/"

@@ -18,9 +18,11 @@ router.post('/playlist/:id', (req, res) => {
 
   newPlaylist.save()
     .then(doc => {
-      res.send({success: true})
+      res.send({error: null, id: doc.playlistId})
     })
-    .catch(err => { throw err })
+    .catch(err => {
+      res.send({error: err})
+    })
 
 })
 

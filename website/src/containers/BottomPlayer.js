@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
-import { pausePlaying, playPlaying, startPlayingAction, getSongIdByIndex } from "../actions"
+import { pausePlaying, playPlaying, startPlayingAction, getSongIdByIndex } from "../actions/playlist"
 import { PAUSE, PLAY, NEXT, PREV } from "../constants"
 import '../index.css';
 

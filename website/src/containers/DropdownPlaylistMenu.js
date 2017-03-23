@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import DropdownMenu from 'react-dd-menu';
+import { connect } from 'react-redux'
 
+import DropdownMenu from 'react-dd-menu';
 import DropdownItem from '../components/DropdownItem'
 
-export class DropdownItemMenu extends Component {
+class DropdownPlaylistMenu extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -23,17 +24,24 @@ export class DropdownItemMenu extends Component {
     let menuOptions = {
       isOpen: this.state.isMenuOpen,
       close: this.close.bind(this),
-      toggle: <div className="btn moreBtn" onClick={this.toggle.bind(this)}></div>,
+      toggle: <div className="btn moreBtn playlistBtn" onClick={this.toggle.bind(this)}></div>,
       className: "menu",
       align: 'left',
     };
     let obj = this.props.items
     return (
       <DropdownMenu {...menuOptions}>
-        <DropdownItem name={obj.delete.name} index={obj.delete.index} isAction={true}/>
-        <DropdownItem url={obj.album.link} name={obj.album.name} isAction={false}/>
-        <DropdownItem url={obj.author.link} name={obj.author.name} isAction={false}/>
+        <li className="dropdownItem"><a onClick={() => this.handleClick()}>Save</a></li>
+        <li className="dropdownItem"><a href={this.props.url}>Open on Soundcloud</a></li>
       </DropdownMenu>
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    url: state.playlist.link
+  }
+}
+
+export default connect(mapStateToProps)(DropdownPlaylistMenu)
