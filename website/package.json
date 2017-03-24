@@ -14,6 +14,7 @@
     "react-addons-css-transition-group": "^15.4.2",
     "react-dd-menu": "^2.0.0",
     "react-dom": "^15.4.2",
+    "react-popup": "^0.6.0",
     "react-redux": "^5.0.3",
     "react-router": "^3.0.2",
     "react-router-redux": "^4.0.8",
@@ -22,6 +23,7 @@
     "redux-connect": "^5.0.0",
     "redux-logger": "^2.8.2",
     "redux-thunk": "^2.2.0",
+    "sha1": "^1.1.1",
     "soundcloud": "^3.1.2"
   },
   "scripts": {

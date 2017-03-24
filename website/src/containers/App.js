@@ -6,6 +6,8 @@ import BottomPlayer from "./BottomPlayer"
 import Playlist from "./Playlist"
 import '../index.css'
 
+import Popup from 'react-popup'
+
 import { fetchPlaylist } from "../actions/playlist"
 
 class App extends Component {
@@ -19,6 +21,15 @@ class App extends Component {
   render() {
     return (
       <div className="application" id="application">
+          <Popup
+            className="mm-popup"
+            btnClass="mm-popup__btn"
+            closeBtn={true}
+            closeHtml={null}
+            defaultOk="Ok"
+            defaultCancel="Cancel"
+            wildClasses={false}
+          />
           <div className="appContainer">
               <PlaylistInfo />
               <Playlist />
