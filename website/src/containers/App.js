@@ -1,36 +1,42 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import PlaylistInfo from "../components/PlaylistInfo"
-import BottomPlayer from "./BottomPlayer"
-import Playlist from "./Playlist"
+import PlaylistInfo from '../components/PlaylistInfo'
+import BottomPlayer from './BottomPlayer'
+import Playlist from './Playlist'
+import { MASTER } from '../constants'
 import '../index.css'
 
 import Popup from 'react-popup'
 
-import { fetchPlaylist } from "../actions/playlist"
+import { fetchPlaylist } from '../actions/playlist'
+import { fetchPlaylistFromMongo } from '../actions/database'
 
 class App extends Component {
   componentWillMount = () => {
-    this.props.dispatch(fetchPlaylist(this.props.route))
+    if(this.props.saved){
+      this.props.dispatch(fetchPlaylistFromMongo(this.props.id, this.props.type))
+    } else {
+      this.props.dispatch(fetchPlaylist(this.props.route, MASTER))
+    }
   }
 
   componentDidMount = () => {
-    window.location.hash = "application"
+    window.location.hash = 'application'
   }
   render() {
     return (
-      <div className="application" id="application">
+      <div className='application' id='application'>
           <Popup
-            className="mm-popup"
-            btnClass="mm-popup__btn"
+            className='mm-popup'
+            btnClass='mm-popup__btn'
             closeBtn={true}
             closeHtml={null}
-            defaultOk="Ok"
-            defaultCancel="Cancel"
+            defaultOk='Ok'
+            defaultCancel='Cancel'
             wildClasses={false}
           />
-          <div className="appContainer">
+          <div className='appContainer'>
               <PlaylistInfo />
               <Playlist />
         </div>

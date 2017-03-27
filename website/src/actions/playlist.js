@@ -55,9 +55,6 @@ const normalize = data => {
     link: data.permalink_url,
     image: data.artwork_url ? data.artwork_url.replace('-large', '-t300x300') : data.tracks[0].artwork_url.replace('-large', '-t300x300'),
     tracks: data.tracks,
-    isPlaying: false,
-    currentSongPosition: 0,
-    currentSong: data.tracks[0]
   }
   return obj
 }

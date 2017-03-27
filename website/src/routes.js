@@ -1,7 +1,12 @@
 import React from "react";
-import { Route } from 'react-router';
+import { Route, Router } from 'react-router';
 import App from "./containers/App";
+import PasswordForm from './containers/PasswordForm'
 
 export default
-  <Route path="/:playlist"
-         component={App} />
+  <Router>
+    <Route path="/:playlist"
+           component={App} />
+    <Route path="/:type/:playlist"
+          component={PasswordForm} />
+  </Router>

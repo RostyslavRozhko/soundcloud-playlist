@@ -34,7 +34,7 @@ router.get('/playlist/:id', (req, res) => {
 
   promise
     .then(data => {
-      res.send({error: null, data: data})
+      res.send({error: null, data: data.state})
     })
     .catch(err => {
       res.send({error: err})
@@ -58,6 +58,31 @@ router.get('/password/:id', (req, res) => {
       res.send({error: err})
     })
 
+})
+
+router.post('/password/:id', (req, res) => {
+  let id = req.params.id
+  let inputData = req.body
+
+  let query = Playlist.findOne({playlistId: id})
+    .select({"id": 1, "playlistId": 1, "password": 1, "masterPassword": 1})
+
+  let promise = query.exec()
+
+  promise
+    .then(data => {
+      if(data.masterPassword == inputData.password){
+        res.send({error: null, data: {masterPassword: true}})
+      } else if(data.password == inputData.password) {
+        res.send({error: null, data: {password: true}})
+      } else {
+        res.send({error: null, data: null})
+      }
+
+    })
+    .catch(err => {
+      res.send({error: err})
+    })
 })
 
 module.exports = router;
