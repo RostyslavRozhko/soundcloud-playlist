@@ -404,7 +404,7 @@ ul, .dd-items-left{
 
         .mm-popup__box__footer {
             overflow: hidden;
-            padding: 40px 20px 20px;
+            padding: 10px 20px 20px;
         }
 
             .mm-popup__box__footer__right-space {
@@ -477,4 +477,19 @@ ul, .dd-items-left{
         text-align: center;
         margin-top: 10px;
     }
+}
+
+.password_input {
+  height: 18px;
+  padding-left: 5px;
+  font-size: 14px;
+  margin: 5px 0;
+  margin-bottom: 10px;
+  width: 100%;
+  border: 1px solid rgb(186, 186, 186);
+  border-radius: 4px;
+}
+
+.checkbox_p{
+  margin-top: 10px;
 }

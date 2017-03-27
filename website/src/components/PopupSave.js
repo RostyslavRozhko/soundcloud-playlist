@@ -15,22 +15,17 @@ export default class PopupSave extends Component{
   }
 
   render(){
-    // let fuck = null;
-    // if(this.state.isTogled){
-    //   fuck = <div>
-    //     <input type="text" placeholder="password"/>
-    //     <input type="text" placeholder="master password"/>
-    //   </div>
-    // }
 
     return(
       <div>
-        <p>
+        <span>Set password to playlist:</span>
+        <input type="password" name="password" placeholder="Password" onChange={this.handleChange} className="password_input"/>
+        <span>To be able to change playlist enter master password:</span>
+        <input type="password" name="masterPassword" placeholder="Master password" onChange={this.handleChange} className="password_input"/>
+        <div className="checkbox_p">
           <input type="checkbox"/>
-          <div>Make public</div>
-        </p>
-        <input type="text" name="password" placeholder="password" onChange={this.handleChange}/>
-        <input type="text" name="masterPassword" placeholder="master password" onChange={this.handleChange}/>
+          <span>Make public</span>
+        </div>
       </div>
     )
   }
