@@ -7,6 +7,14 @@ export function savePlaylist(state, password, masterPassword){
   let hashedPassword = sha1(password)
   let hashedmasterPassword = sha1(masterPassword)
 
+  let stateToSave = {
+    id: state.id,
+    title: state.title,
+    link: state.link,
+    image: state.image,
+    tracks: state.tracks
+  }
+
   fetch(`${WEBSITE_URI}/playlist/${id}`,
   {
     headers: {
@@ -14,7 +22,7 @@ export function savePlaylist(state, password, masterPassword){
       'Content-Type': 'application/json'
     },
     method: "POST",
-    body: {state: state, password: hashedPassword, master_password: hashedmasterPassword}
+    body: JSON.stringify({state: stateToSave, password: hashedPassword, master_password: hashedmasterPassword})
   })
     .then(res => (res.json()))
     .then(res => {
