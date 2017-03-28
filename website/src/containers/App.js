@@ -4,12 +4,12 @@ import { connect } from 'react-redux'
 import PlaylistInfo from '../components/PlaylistInfo'
 import BottomPlayer from './BottomPlayer'
 import Playlist from './Playlist'
-import { MASTER } from '../constants'
+import { USER } from '../constants'
 import '../index.css'
 
 import Popup from 'react-popup'
 
-import { fetchPlaylist } from '../actions/playlist'
+import { fetchPlaylist, setType } from '../actions/playlist'
 import { fetchPlaylistFromMongo } from '../actions/database'
 
 class App extends Component {
@@ -17,7 +17,7 @@ class App extends Component {
     if(this.props.saved){
       this.props.dispatch(fetchPlaylistFromMongo(this.props.id, this.props.type))
     } else {
-      this.props.dispatch(fetchPlaylist(this.props.route, MASTER))
+      this.props.dispatch(fetchPlaylist(this.props.route, USER))
     }
   }
 

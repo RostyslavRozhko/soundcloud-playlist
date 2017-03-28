@@ -1,6 +1,7 @@
 import SC from 'soundcloud'
 import { CLIENT_ID } from "../constants"
 
+import { SET_TYPE } from '../constants'
 import { SET_PLAYLIST, MOVE_ITEMS, DELETE } from "../constants"
 import { START_PLAYING, PAUSE, PLAY, STOP } from "../constants"
 
@@ -48,8 +49,9 @@ SC.initialize({
   client_id: CLIENT_ID
 })
 
-const normalize = data => {
+const normalize = (data, type) => {
   let obj = {
+    type: type,
     id: data.id,
     title: data.title,
     link: data.permalink_url,
@@ -59,11 +61,11 @@ const normalize = data => {
   return obj
 }
 
-export function fetchPlaylist(route){
+export function fetchPlaylist(route, type){
   return (dispatch, state) => {
     SC.get(`playlists${route}`)
       .then(info =>{
-        dispatch(setPlaylist(normalize(info)))
+        dispatch(setPlaylist(normalize(info, type)))
         dispatch(startPlayingAction(0, info.tracks[0].id))
       })
       .catch(err => { throw err })

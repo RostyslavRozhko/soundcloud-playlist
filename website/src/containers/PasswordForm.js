@@ -30,12 +30,12 @@ class PasswordForm extends Component {
     let { id, password } = this.state
     checkPassword(this.state.id, this.state.password).
       then(response => {
-          if(response.masterPassword){
+          if(response.data.masterPassword){
             this.setState({
               type: MASTER,
               logined: true
             })
-          } else {
+          } else if(response.data.password){
             this.setState({
               type: USER,
               logined: true
@@ -44,16 +44,6 @@ class PasswordForm extends Component {
       })
       .catch(err => console.log(err))
   }
-
-  suka = () => (
-    this.state.logined
-      ? <App saved={true} type={this.state.type} id={this.state.id}/>
-      : <form onSubmit={this.handleSubmit}>
-          <span>Enter playlist password:</span>
-          <input type="password" placeholder="Password" value={this.state.password} onChange={this.handleChange}/>
-          <input type="submit" value="Submit" />
-        </form>
-  )
 
   render(){
     return(

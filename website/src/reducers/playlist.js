@@ -1,7 +1,6 @@
 import { SET_PLAYLIST, MOVE_ITEMS, DELETE } from '../constants'
 import { START_PLAYING, PAUSE, PLAY, STOP } from '../constants'
-
-// import { arrayMove } from 'react-sortable-hoc'
+import { SET_TYPE } from '../constants'
 
 export default function playlist(state = {}, action){
   switch(action.type){
@@ -46,6 +45,11 @@ export default function playlist(state = {}, action){
           ...state.tracks.slice(action.index + 1)
         ],
         currentSongPosition: state.currentSongPosition > action.index ? state.currentSongPosition - 1 : state.currentSongPosition
+      }
+    case SET_TYPE:
+      return {
+        ...state,
+        type: action.userType
       }
     default:
       return state

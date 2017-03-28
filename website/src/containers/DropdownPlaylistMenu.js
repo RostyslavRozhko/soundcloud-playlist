@@ -7,7 +7,8 @@ import DropdownItem from '../components/DropdownItem'
 import Popup from 'react-popup'
 import PopupSave from '../components/PopupSave'
 
-import { savePlaylist } from '../actions/database'
+import { savePlaylist, updatePlaylist } from '../actions/database'
+import { MASTER } from '../constants'
 
 class DropdownPlaylistMenu extends Component {
   constructor(props) {
@@ -79,7 +80,10 @@ class DropdownPlaylistMenu extends Component {
     let obj = this.props.items
     return (
       <DropdownMenu {...menuOptions}>
-        <li className="dropdownItem" onClick={() => this.savePlaylist(this.props.state)}><a>Save playlist</a></li>
+        {this.props.type === MASTER
+          ? <li className="dropdownItem" onClick={() => updatePlaylist(this.props.state.id, this.props.state.tracks)}><a>Update playlist</a></li>
+          : <li className="dropdownItem" onClick={() => this.savePlaylist(this.props.state)}><a>Save playlist</a></li>
+        }
         <li className="dropdownItem"><a href={this.props.url}>Open on Soundcloud</a></li>
       </DropdownMenu>
     );
@@ -89,7 +93,8 @@ class DropdownPlaylistMenu extends Component {
 function mapStateToProps(state) {
   return {
     state: state.playlist,
-    url: state.playlist.link
+    url: state.playlist.link,
+    type: state.playlist.type
   }
 }
 

@@ -27,6 +27,27 @@ router.post('/playlist/:id', (req, res) => {
 
 })
 
+router.post('/playlist/update/:id', (req, res) => {
+  let id = req.params.id
+  let data = req.body
+
+  Playlist.findOneAndUpdate(
+    {'playlistId': id},
+    { $set: {
+            'state.tracks': data.tracks
+        }},
+    {safe: true, upsert: true, new : true},
+
+    function(err, model) {
+            if(err){
+                res.send({error: null, id: doc.playlistId})
+            } else {
+                res.send({error: err})
+            }
+        }
+  )
+})
+
 router.get('/playlist/:id', (req, res) => {
   let id = req.params.id
 
