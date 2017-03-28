@@ -14,6 +14,12 @@ export default class PopupSave extends Component{
     })
   }
 
+  checkboxChange = (event) => {
+    this.props.manager({
+      checkbox: event.target.checked
+    })
+  }
+
   render(){
 
     return(
@@ -22,8 +28,9 @@ export default class PopupSave extends Component{
         <input type="password" name="password" placeholder="Password" onChange={this.handleChange} className="password_input"/>
         <span>To be able to change playlist enter master password:</span>
         <input type="password" name="masterPassword" placeholder="Master password" onChange={this.handleChange} className="password_input"/>
+        {/* Change style of input fields on checkbox chang */}
         <div className="checkbox_p">
-          <input type="checkbox"/>
+          <input type="checkbox" name="checkbox" onChange={this.checkboxChange}/>
           <span>Make public</span>
         </div>
       </div>

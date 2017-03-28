@@ -3,10 +3,12 @@ import { setPlaylist, startPlayingAction } from './playlist'
 import { WEBSITE_URI } from "../constants"
 
 
-export function savePlaylist(state, password, masterPassword){
+export function savePlaylist(state, password, masterPassword, type){
   let id = state.id + (Math.floor(Math.random() * 10000)).toString()
-  let hashedPassword = sha1(password)
-  let hashedmasterPassword = sha1(masterPassword)
+  if(type ==+ "s") {
+    var hashedPassword = sha1(password)
+    var hashedmasterPassword = sha1(masterPassword)
+  }
 
   let stateToSave = {
     id: id,
@@ -28,7 +30,7 @@ export function savePlaylist(state, password, masterPassword){
     .then(res => (res.json()))
     .then(res => {
       if(!res.error){
-        window.location.href = `/s/${res.id}`
+        window.location.href = `/${type}/${res.id}`
         return true
       } else {
         return false

@@ -7,7 +7,7 @@ import DropdownItem from '../components/DropdownItem'
 import Popup from 'react-popup'
 import PopupSave from '../components/PopupSave'
 
-import { savePlaylist, updatePlaylist } from '../actions/database'
+import { savePlaylist, updatePlaylist, savePublicPlaylist } from '../actions/database'
 import { MASTER } from '../constants'
 
 class DropdownPlaylistMenu extends Component {
@@ -37,6 +37,10 @@ class DropdownPlaylistMenu extends Component {
       this.setState({
         masterPassword: ls.masterPassword
       })
+    if(ls.checkbox)
+      this.setState({
+        checkbox: ls.checkbox
+      })
   }
 
   savePlaylist = (state) => {
@@ -60,9 +64,13 @@ class DropdownPlaylistMenu extends Component {
               text: 'Save',
               className: 'success',
               action: function () {
-                  savePlaylist(state, thiss.state.password, thiss.state.masterPassword)
-                  /** Close this popup. Close will always close the current visible one, if one is visible */
-                  Popup.close();
+                if(thiss.state.checkbox){
+                  savePlaylist(state, null, null, "p")
+                } else {
+                  savePlaylist(state, thiss.state.password, thiss.state.masterPassword, "s")
+                }
+                /** Close this popup. Close will always close the current visible one, if one is visible */
+                Popup.close();
               }
           }]
       }
