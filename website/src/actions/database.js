@@ -3,7 +3,7 @@ import { setPlaylist, startPlayingAction } from './playlist'
 import { WEBSITE_URI } from "../constants"
 
 
-export function savePlaylist(state, password, masterPassword, type){
+export function savePlaylist(state, password, masterPassword, type, email){
   let id = state.id + (Math.floor(Math.random() * 10000)).toString()
   if(type ==+ "s") {
     var hashedPassword = sha1(password)
@@ -25,7 +25,7 @@ export function savePlaylist(state, password, masterPassword, type){
       'Content-Type': 'application/json'
     },
     method: "POST",
-    body: JSON.stringify({state: stateToSave, password: hashedPassword, master_password: hashedmasterPassword})
+    body: JSON.stringify({state: stateToSave, password: hashedPassword, master_password: hashedmasterPassword, email: email})
   })
     .then(res => (res.json()))
     .then(res => {

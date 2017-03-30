@@ -2,10 +2,9 @@ const kue = require('kue');
 const nodemailer = require('nodemailer')
 const redis = require('kue/lib/redis')
 
-console.log(process.env.REDIS_URL);
-
+// Uncomment on production!
 let jobs = kue.createQueue({
-  redis: process.env.REDIS_URL
+  // redis: process.env.REDIS_URL
 })
 
 let email = 'rostyslav.rozhko@gmail.com'

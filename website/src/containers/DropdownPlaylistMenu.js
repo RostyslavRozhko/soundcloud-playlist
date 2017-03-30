@@ -41,6 +41,10 @@ class DropdownPlaylistMenu extends Component {
       this.setState({
         checkbox: ls.checkbox
       })
+    if(ls.email)
+      this.setState({
+        email: ls.email
+      })
   }
 
   savePlaylist = (state) => {
@@ -67,7 +71,7 @@ class DropdownPlaylistMenu extends Component {
                 if(thiss.state.checkbox){
                   savePlaylist(state, null, null, "p")
                 } else {
-                  savePlaylist(state, thiss.state.password, thiss.state.masterPassword, "s")
+                  savePlaylist(state, thiss.state.password, thiss.state.masterPassword, "s", thiss.state.email)
                 }
                 /** Close this popup. Close will always close the current visible one, if one is visible */
                 Popup.close();

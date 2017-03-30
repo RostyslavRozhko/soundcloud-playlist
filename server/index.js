@@ -53,10 +53,4 @@ app.use(function(err, req, res, next) {
 
 let sendMail = require('./sendMail')
 
-sendMail.newMail('rostyslav.rozhko@gmail.com', {
-  title: 'mail-test',
-  html: 'asddsa'
-})
-
-
 module.exports = app;

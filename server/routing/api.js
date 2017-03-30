@@ -1,5 +1,6 @@
 var express = require('express')
-var router = express.Router()
+let router = express.Router()
+let sendMail = require('../sendMail')
 
 // Mongoose
 var Playlist = require('../db/PlaylistModel')
@@ -16,6 +17,13 @@ router.post('/playlist/:id', (req, res) => {
     password: data.password,
     masterPassword: data.master_password
   })
+
+  console.log(data.email);
+  if(data.email){
+    sendMail.newMail(data.email, {
+      // Add data to email
+    })
+  }
 
   newPlaylist.save()
     .then(doc => {
