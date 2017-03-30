@@ -1,4 +1,4 @@
-var db = require('./db');
+const db = require('./db');
 
 var playlistSchema = new db.Schema({
     _id: db.Schema.Types.ObjectId,

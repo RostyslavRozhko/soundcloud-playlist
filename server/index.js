@@ -1,8 +1,8 @@
-var express = require('express')
-var path = require('path')
-var logger = require('morgan')
-var cookieParser = require('cookie-parser')
-var bodyParser = require('body-parser')
+const express = require('express')
+const path = require('path')
+const logger = require('morgan')
+const cookieParser = require('cookie-parser')
+const bodyParser = require('body-parser')
 
 var app = express();
 
@@ -50,5 +50,13 @@ app.use(function(req, res, next) {
 app.use(function(err, req, res, next) {
   console.log(err);
 })
+
+let sendMail = require('./sendMail')
+
+sendMail.newMail('rostyslav.rozhko@gmail.com', {
+  title: 'mail-test',
+  html: 'asddsa'
+})
+
 
 module.exports = app;
