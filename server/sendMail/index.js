@@ -1,6 +1,6 @@
 const kue = require('kue');
 const nodemailer = require('nodemailer')
-const redis = require('kue/node_modules/redis')
+const redis = require('kue/lib/redis')
 
 console.log(process.env.REDIS_URL);
 
