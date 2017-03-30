@@ -4,16 +4,9 @@ const redis = require('kue/lib/redis')
 
 console.log(process.env.REDIS_URL);
 
-kue.redis.createClient = function() {
-    var redisUrl = url.parse(process.env.REDIS_URL)
-      , client = redis.createClient(redisUrl.port, redisUrl.hostname);
-    if (redisUrl.auth) {
-        client.auth(redisUrl.auth.split(":")[1]);
-    }
-    return client;
-};
-
-let jobs = kue.createQueue()
+let jobs = kue.createQueue({
+  redis: process.env.REDIS_URL
+})
 
 let email = 'rostyslav.rozhko@gmail.com'
 let password = 'rostyshka971612'
@@ -29,7 +22,7 @@ let transport = nodemailer.createTransport({
 
 function newMail(to, data) {
   let job = jobs.create('email', {
-    title: data.title,
+    subject: data.title,
     to: to,
     from: email,
     html: data.html
@@ -37,10 +30,10 @@ function newMail(to, data) {
 
   job
     .on('complete', function (){
-      console.log('Job', job.id, 'with name', job.data.name, 'is done')
+      console.log('Job', job.id, 'with name', job.data.subject, 'is done')
     })
     .on('failed', function (){
-      console.log('Job', job.id, 'with name', job.data.name, 'has failed')
+      console.log('Job', job.id, 'with name', job.data.subject, 'has failed')
     })
 
   job.priority('high')
@@ -48,15 +41,11 @@ function newMail(to, data) {
 }
 
 jobs.process('email', (job, done) => {
-  mail.from = job.from
-  mail.to = job.to
-  mail.subject = job.title
-  mail.html = job.html
-  transport.sendMail(mail, (error, response) => {
+  transport.sendMail(job.data, (error, response) => {
     if(error){
       console.log(error);
     } else {
-      console.log(job.data.title+' complete');
+      console.log(job.data.subject+' complete');
     }
   })
   done()
