@@ -4,7 +4,7 @@ const redis = require('kue/lib/redis')
 
 // Uncomment on production!
 let jobs = kue.createQueue({
-  // redis: process.env.REDIS_URL
+  redis: process.env.REDIS_URL
 })
 
 let email = 'rostyslav.rozhko@gmail.com'
