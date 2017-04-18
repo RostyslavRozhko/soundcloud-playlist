@@ -10,6 +10,8 @@ router.post('/playlist/:id', (req, res) => {
   let id = req.params.id
   let data = req.body
 
+  console.log(data);
+
   let newPlaylist = new Playlist({
     _id: mongoose.Types.ObjectId(),
     playlistId: id,
@@ -21,7 +23,8 @@ router.post('/playlist/:id', (req, res) => {
   console.log(data.email);
   if(data.email){
     sendMail.newMail(data.email, {
-      // Add data to email
+      title: "",
+      html: ""
     })
   }
 

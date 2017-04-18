@@ -28,7 +28,7 @@ export default class PopupSave extends Component{
         <input type="password" name="password" placeholder="Password" onChange={this.handleChange} className="password_input" required />
         <span>To be able to change playlist enter master password:</span>
         <input type="password" name="masterPassword" placeholder="Master password" onChange={this.handleChange} className="password_input" required/>
-        <span>Set your email to dont forget passwords(optional):</span>
+        <span>Set your email to not forget passwords(optional):</span>
         <input type="email" name="email" placeholder="Email" onChange={this.handleChange} className="password_input" />
         {/* Change style of input fields on checkbox chang */}
         <div className="checkbox_p">

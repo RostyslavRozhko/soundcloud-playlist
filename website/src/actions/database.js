@@ -5,7 +5,7 @@ import { WEBSITE_URI } from "../constants"
 
 export function savePlaylist(state, password, masterPassword, type, email){
   let id = state.id + (Math.floor(Math.random() * 10000)).toString()
-  if(type ==+ "s") {
+  if(type == "s") {
     var hashedPassword = sha1(password)
     var hashedmasterPassword = sha1(masterPassword)
   }
@@ -72,7 +72,9 @@ export function checkPassword(id, password) {
     method: "POST",
     body: JSON.stringify({password: hashedPassword})
   })
-  .then(response => response.json())
+  .then(response => {
+    return response.json()}
+  )
 }
 
 export function fetchPlaylistFromMongo(id, type){

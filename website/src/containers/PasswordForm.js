@@ -11,7 +11,8 @@ class PasswordForm extends Component {
     super(props)
     this.state = {
       password: '',
-      logined: false
+      logined: false,
+      error: false
     }
   }
 
@@ -22,7 +23,10 @@ class PasswordForm extends Component {
   }
 
   handleChange = (event) => {
-    this.setState({password: event.target.value});
+    this.setState({
+      password: event.target.value,
+      error: false
+    });
   }
 
   handleSubmit = (event) => {
@@ -30,7 +34,9 @@ class PasswordForm extends Component {
     let { id, password } = this.state
     checkPassword(this.state.id, this.state.password).
       then(response => {
-          if(response.data.masterPassword){
+          if(!response.data){
+            this.throwError()
+          } else if(response.data.masterPassword){
             this.setState({
               type: MASTER,
               logined: true
@@ -45,16 +51,28 @@ class PasswordForm extends Component {
       .catch(err => console.log(err))
   }
 
+  throwError = () => {
+    console.log("fuck");
+    this.setState({
+      error: true
+    })
+  }
+
   render(){
+    if(this.state.error){
+      var error = <div className="alert">Wrong password</div>
+    }
+
     return(
       <div>
         {
           this.state.logined
             ? <App saved={true} type={this.state.type} id={this.state.id}/>
-            : <form onSubmit={this.handleSubmit}>
+            : <form onSubmit={this.handleSubmit} className="passwordForm">
                 <span>Enter playlist password:</span>
                 <input type="password" placeholder="Password" value={this.state.password} onChange={this.handleChange}/>
-                <input type="submit" value="Submit" />
+                {error}
+                <input type="submit" value="Submit" className="mm-popup__btn mm-popup__btn--success" />
               </form>
         }
       </div>
