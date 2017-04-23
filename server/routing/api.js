@@ -23,8 +23,8 @@ router.post('/playlist/:id', (req, res) => {
   console.log(data.email);
   if(data.email){
     sendMail.newMail(data.email, {
-      title: "",
-      html: ""
+      title: "Soundcloud playlist",
+      html: `<p>You have successfully saved a playlist</p><p>Here is link: <a href="sound.rostyslavr.com/s/${id}">sound.rostysalvr.com/s/${id}<a/></p>`
     })
   }
 
