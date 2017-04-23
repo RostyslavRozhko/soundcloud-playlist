@@ -68,7 +68,7 @@ class DropdownPlaylistMenu extends Component {
               text: 'Save',
               className: 'success',
               action: function () {
-                if(thiss.state.checkbox){
+                if(!thiss.state.checkbox){
                   savePlaylist(state, thiss.state.password, thiss.state.masterPassword, "s", thiss.state.email)
                 } else {
                   savePlaylist(state, null, null, "p")

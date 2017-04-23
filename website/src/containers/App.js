@@ -22,7 +22,7 @@ class App extends Component {
   }
 
   componentDidMount = () => {
-    window.location.hash = 'application'
+    // window.location.hash = 'application'
   }
   render() {
     return (

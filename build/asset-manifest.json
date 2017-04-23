@@ -1,8 +1,8 @@
 {
-  "main.css": "static/css/main.d08919d3.css",
-  "main.css.map": "static/css/main.d08919d3.css.map",
-  "main.js": "static/js/main.d463619b.js",
-  "main.js.map": "static/js/main.d463619b.js.map",
+  "main.css": "static/css/main.399fc282.css",
+  "main.css.map": "static/css/main.399fc282.css.map",
+  "main.js": "static/js/main.50a4f96a.js",
+  "main.js.map": "static/js/main.50a4f96a.js.map",
   "static/media/more.svg": "static/media/more.583db37b.svg",
   "static/media/moreB.svg": "static/media/moreB.738fe9d0.svg",
   "static/media/next.svg": "static/media/next.773eb420.svg",
@@ -11,6 +11,5 @@
   "static/media/prev.svg": "static/media/prev.2183a1b5.svg",
   "static/media/reorder.svg": "static/media/reorder.b02b17f9.svg",
   "static/media/shuffle.svg": "static/media/shuffle.12773a04.svg",
-  "static/media/toveStyrke.jpg": "static/media/toveStyrke.d7efda77.jpg",
   "static/media/volume.svg": "static/media/volume.1859f3d7.svg"
 }

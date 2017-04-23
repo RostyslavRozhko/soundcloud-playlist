@@ -64,7 +64,7 @@ class PasswordForm extends Component {
     }
 
     return(
-      <div>
+      <div className="height">
         {
           this.state.logined
             ? <App saved={true} type={this.state.type} id={this.state.id}/>
