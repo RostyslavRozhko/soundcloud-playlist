@@ -14,7 +14,7 @@ export const SET_PLAYLIST = "SET_PLAYLIST"
 export const MOVE_ITEMS = "MOVE_ITEMS"
 
 // Database
-export const WEBSITE_URI = "http://localhost:9000/api"
+export const WEBSITE_URI = "http://sound.rostyslavr.com/api"
 
 
 // User type
