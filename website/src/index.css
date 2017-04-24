@@ -133,6 +133,7 @@ a{
 .item .clickable img{
   height: 40px;
   width: 40px;
+  position: relative;
 }
 
 .item .clickable .songNameText{
@@ -260,7 +261,7 @@ ul, .dd-items-left{
 }
 
 .currentSong{
-  background: green
+  background: url(../public/images/eq.gif);
 }
 
 .songNameText{

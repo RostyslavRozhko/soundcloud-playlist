@@ -37,7 +37,7 @@ class PlaylistItem extends Component {
 
     let image = null
     if (this.props.isCurrent)
-      image = <img src="" alt="" className="currentSong"></img>
+      image = <img src="" alt=""  className="currentSong"></img>
     else
       image = <img src={song.artwork_url} alt=""></img>
 
