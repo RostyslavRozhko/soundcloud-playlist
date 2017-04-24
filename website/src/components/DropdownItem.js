@@ -19,7 +19,7 @@ class DropdownItem extends Component {
     if(this.props.isAction){
       rend = <li className="dropdownItem"><a onClick={() => this.handleClick(this.props.index)}>{this.props.name}</a></li>
     } else {
-      rend = <li className="dropdownItem"><a href={this.props.url}>{this.props.name}</a></li>
+      rend = <li className="dropdownItem"><a href={this.props.url} target="_blank">{this.props.name}</a></li>
     }
 
     return(
