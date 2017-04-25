@@ -7,8 +7,8 @@ let jobs = kue.createQueue({
   redis: process.env.REDIS_URL
 })
 
-let email = 'rostyslav.rozhko@gmail.com'
-let password = 'rostyshka971612'
+let email = 'email'
+let password = 'password'
 let mailService = 'gmail'
 
 let transport = nodemailer.createTransport({
